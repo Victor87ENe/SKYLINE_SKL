@@ -78,13 +78,13 @@
                   <tbody>
                     {% for eachstudent in students %}  <!-- Change 'studen' to 'students' -->
                     <tr> 
-                        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMS3wbH84PsWS_j9jQ9r7UsHCw88OOlF-UCQ&s" alt="Profile" width="80" height="80" class="rounded-circle"></td>
+                        <td><img src="{{eachstudent.student_profile.profile_picture.url}}" alt="Profile" width="80" height="80" class="rounded-circle"></td>
                         <td>{{ eachstudent.first_name }} {{ eachstudent.last_name }}</td>
                         <td>Cohort 1</td>
                         <td>Software Engineering</td>
                         <td><span class="badge bg-success text-white">{{ eachstudent.status }}</span></td>
                         <td>{{ eachstudent.date_join }}</td>
-                        <td>4.5</td>
+                        <td>{{ eachstudent.student_profile.rating }}</td>
                         <td><span class="badge bg-info text-white">{{ eachstudent.student_type }}</span></td>
                         {% comment %} <td><span class="badge bg-info text-white">cohort leader</span></td> {% endcomment %}
                         <td>
