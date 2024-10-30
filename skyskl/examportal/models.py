@@ -4,6 +4,7 @@ import datetime
 # Create your models here.
 
 student_types = [
+    ('deputy', 'vice leader'),
     ('member', 'Member'),
     ('alumni', 'Alumni'),
     ('president', 'president'),
