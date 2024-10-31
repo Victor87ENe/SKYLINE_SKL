@@ -79,9 +79,26 @@
                     {% for eachstudent in students %}  <!-- Change 'studen' to 'students' -->
                     <tr> 
                         <td><img src="{{eachstudent.student_profile.profile_picture.url}}" alt="Profile" width="80" height="80" class="rounded-circle"></td>
+
                         <td>{{ eachstudent.first_name }} {{ eachstudent.last_name }}</td>
-                        <td>Cohort 1</td>
-                        <td>Software Engineering</td>
+
+                        {% if eachstudent.cohortgroup_set.exists %}
+                        {% for cohort in eachstudent.cohortgroup_set.all  %}
+                        <td>{{cohort.name }}</td>
+                        {% endfor %}
+                        {% else %}
+                        <td>no cohort assigned</td>
+                        {% endif %}
+
+                        {% if eachstudent.program_set.exists %}
+                        {% for program in eachstudent.program_set.all  %}
+                        <td>{{program.courses }}</td>
+                        {% endfor %}
+                        {% else %}
+                        <td>no course assigned</td>
+                        {% endif %}
+                        
+                        
                         <td><span class="badge bg-success text-white">{{ eachstudent.status }}</span></td>
                         <td>{{ eachstudent.date_join }}</td>
                         <td>{{ eachstudent.student_profile.rating }}</td>
