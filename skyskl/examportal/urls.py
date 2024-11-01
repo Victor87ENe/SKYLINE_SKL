@@ -11,6 +11,8 @@ from . import views
 
 urlpatterns = [
     path('', views.examportal, name='examportal'),
-    path('home/', views.home, name='home'),
+    
     path('about/', views.about, name='about'),
+
+    path('student/<int:student_id>/', views.student_profile, name='student_profile'),
 ]
