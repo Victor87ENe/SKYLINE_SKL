@@ -1,5 +1,5 @@
 from django.urls import path
-# from . views import examportal,home, about
+from . views import examportal,home, about
 from . import views
 
 # urlpatterns = [
@@ -14,5 +14,7 @@ urlpatterns = [
     
     path('about/', views.about, name='about'),
 
-    path('student/<int:student_id>/', views.student_profile, name='student_profile'),
+    path('student/<str:username>/', views.student_profile, name='student_profile'),
+
+    path('student/<int:student_profile_id>/', views.student_profile, name='student_profile_id'),
 ]
