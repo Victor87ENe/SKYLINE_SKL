@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
-# from django.views.generic import View
-# from . views import examportal,home, about
-from.models import Student,CohortGroup,Student_Profile
-import pdb
+from.models import Student,Student_Profile,CohortGroup
+from django.urls import reverse
+from django.core.paginator import Paginator
+# import pdb
+
 # Create your views here.
 
 
@@ -20,15 +21,25 @@ def home(request):
 def about(request):
     return render(request, 'about/about.html')
 
-def student_profile(request, student_id):
-    student = get_object_or_404(Student, id=student_id)
+def student_profile(request,id):
+    student = get_object_or_404(Student, id=id)
     profile = get_object_or_404(Student_Profile, student=student) 
+    student_url = reverse('student_profile', kwargs={'id': student.id})
     context = {
         'student': student,
         'profile': profile,
-        'student_profile' : Student_Profile 
     } 
-    return render(request, 'student_profile.html', context)
+    return render(request, 'student_profile/student_profile.html', context)
+   
+def student_list(request):
+    students = Student.objects.all()  # Query your data
+    paginator = Paginator(students, 3)  # Show 3 students per page
+
+    page_number = request.GET.get('page')  # Get the page number from the request
+    page_obj = paginator.get_page(page_number)  # Get the page object for the requested page
+
+    context = {'page_obj': page_obj}
+    return render(request, 'student_list.html', context)    
 
 
     
